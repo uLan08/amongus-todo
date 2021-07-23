@@ -1,0 +1,21 @@
+name: ci
+on: 
+  pull_request:
+    
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Cache package-lock.json
+        id: cache-step
+        uses: actions/cache@v2
+        with:
+          path: ./package-lock.json
+          key: v1-node-dependencies-${{ hashFiles('./package-lock.json') }}
+          restore-keys: v1-node-dependencies-
+      - run: npm install
+      - run: npm test
