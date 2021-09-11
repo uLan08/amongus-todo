@@ -36,4 +36,11 @@ jobs:
         with:
           context: .
           push: true
-          tags: patrickrainier/amongus-todo:${{ github.run_id }} 
+          tags: patrickrainier/amongus-todo:${{ github.run_id }}
+      # This action has a caveat. It builds the docker image again, and there is no option to use an already built image.
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "patrick-amongus-todo"
+          heroku_email: "patrickrainier@gmail.com"
+          usedocker: true          
