@@ -1,11 +1,11 @@
-name: docker
+name: release
 on: 
   push:
     branches:
-      - "answer"
+      - "release"
 
 jobs:
-  docker-build:
+  release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
